@@ -48,4 +48,10 @@ ctrl.eliminarEstablecimientoPorId = async (req, res) => {
   }
 }
 
+// Establecimientos que son propiedad de un usuario
+ctrl.obtenerEstablecimientosPorUsuario = async (req, res) => {
+  const establecimientos = await Establecimiento.find({ usuarioAdmin: req.params.usuarioId });
+  res.status(200).json(establecimientos);
+}
+
 module.exports = ctrl;
