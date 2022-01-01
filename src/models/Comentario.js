@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 const comentarioSchema = new Schema({
-  _id: String,
   comentario: String,
   fecha: Date,
   usuarioId: { ref: 'Usuario', type: String },

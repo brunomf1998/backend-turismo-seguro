@@ -1,4 +1,6 @@
 const Usuario = require('../models/Usuario');
+const Comentario = require('../models/Comentario');
+const Favorito = require('../models/Favorito')
 const ctrl = {};
 
 ctrl.crearUsuario = async (req, res) => {
@@ -24,12 +26,12 @@ ctrl.obtenerUsuarioPorId = async (req, res) => {
   res.status(200).json(usuario);
 }
 
-/*ctrl.updateUserById = async (req, res) => {
+ctrl.actualizarUsuarioPorId = async (req, res) => {
   try {
-    const userUpdated = await Usuario.findByIdAndUpdate(req.params.userId, req.body, {
+    const usuarioActualizado = await Usuario.findByIdAndUpdate(req.params.usuarioId, req.body, {
       new: true
     });
-    res.status(200).json(userUpdated);
+    res.status(200).json(usuarioActualizado);
   } catch (error) {
     res.status(404).json({
       message: error.name
@@ -37,16 +39,18 @@ ctrl.obtenerUsuarioPorId = async (req, res) => {
   }
 }
 
-ctrl.deleteUserById = async (req, res) => {
+ctrl.eliminarUsuarioPorId = async (req, res) => {
   try {
-    await Usuario.findByIdAndDelete(req.params.userId);
+    await Usuario.findByIdAndDelete(req.params.usuarioId);
+    await Comentario.deleteMany({ usuarioId: req.params.usuarioId })
+    await Favorito.deleteMany({ usuarioId: req.params.usuarioId })
     res.status(204).json();
   } catch (error) {
     res.status(404).json({
       message: error.name
     });
   }
-}*/
+}
 
 ctrl.logIn = async (req, res) => {
   const usuarioEncontrado = await Usuario.findOne({ correo: req.body.correo });

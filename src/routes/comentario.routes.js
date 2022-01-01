@@ -6,8 +6,8 @@ const router = Router();
 router.post('/', controladorComentarios.crearComentario);
 router.get('/', controladorComentarios.obtenerComentarios);
 router.get('/:comentarioId', controladorComentarios.obtenerComentarioPorId);
-//router.put('/:userId', controladorComentarios.updateUserById);
-//router.delete('/:userId', controladorComentarios.deleteUserById);
+router.put('/:comentarioId', controladorComentarios.actualizarComentarioPorId);
+router.delete('/:comentarioId', controladorComentarios.eliminarComentarioPorId);
 router.get('/usuario/:usuarioId', controladorComentarios.obtenerComentariosPorUsuario);
 
 module.exports = router;
